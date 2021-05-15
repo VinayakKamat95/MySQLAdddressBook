@@ -85,7 +85,7 @@ mysql> describe Address_Book;
 mysql>
 ====================================================================
 Insert New Contacts to Address Book
-insertNewContactInAddressBoookTable-UC3
+insertNewContactInAddressBookTable-UC3
 
  show tables;
 +-------------------------------+
@@ -127,3 +127,39 @@ mysql> select * from Address_Book;
 6 rows in set (0.00 sec)
 
 mysql>
+====================================================================
+To edit existing Contact Person using their Name
+editContactPersonUsingName-UC4
+
+mysql> select * from Address_Book;
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+| ID | firstName | lastName | address      | city      | state          | zip    | phoneNumber | email           |
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+|  1 | adam      | khan     | bandra       | mumbai    | maharashtra    | 400051 |  9874563210 | adam@khan       |
+|  3 | priya     | gandhi   | gandhi nagar | ahmadabad | gujrat         | 500040 |  7418529630 | priya@gandhi    |
+|  4 | harshad   | marathe  | ujjain       | indore    | madhya pradesh | 300021 |  8874962210 | harshad@marathe |
+|  5 | yogesh    | patil    | balesar      | jodhpur   | rajastan       | 200050 |  9563874210 | yogesh@patil    |
+|  6 | smita     | mantri   | shapar       | rajkot    | gujrat         | 500040 |  9531408764 | smita@mantri    |
+|  7 | omkar     | kamat    | andheri      | mumbai    | maharashtra    | 400050 |  9874453210 | omkar@kamat     |
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+6 rows in set (0.00 sec)
+
+mysql> update Address_Book set address="villeparle", city="mumbai", state="maharashtra", zip=400068, phoneNumber=9874453210, email="om@kamat" where firstName="omkar" AND lastName="kamat";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Address_Book;
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+| ID | firstName | lastName | address      | city      | state          | zip    | phoneNumber | email           |
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+|  1 | adam      | khan     | bandra       | mumbai    | maharashtra    | 400051 |  9874563210 | adam@khan       |
+|  3 | priya     | gandhi   | gandhi nagar | ahmadabad | gujrat         | 500040 |  7418529630 | priya@gandhi    |
+|  4 | harshad   | marathe  | ujjain       | indore    | madhya pradesh | 300021 |  8874962210 | harshad@marathe |
+|  5 | yogesh    | patil    | balesar      | jodhpur   | rajastan       | 200050 |  9563874210 | yogesh@patil    |
+|  6 | smita     | mantri   | shapar       | rajkot    | gujrat         | 500040 |  9531408764 | smita@mantri    |
+|  7 | omkar     | kamat    | villeparle   | mumbai    | maharashtra    | 400068 |  9874453210 | om@kamat        |
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+6 rows in set (0.00 sec)
+
+mysql>
+========================================================================
