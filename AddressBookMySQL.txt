@@ -83,3 +83,47 @@ mysql> describe Address_Book;
 9 rows in set (0.00 sec)
 
 mysql>
+====================================================================
+Insert New Contacts to Address Book
+insertNewContactInAddressBoookTable-UC3
+
+ show tables;
++-------------------------------+
+| Tables_in_addressbook_service |
++-------------------------------+
+| address_book                  |
++-------------------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO Address_Book (firstName, lastName, address, city, state, zip, phoneNumber, email)
+    -> VALUES ("adam", "khan", "bandra", "mumbai", "maharashtra", 400051, 9874563210, "adam@khan"),
+    -> ("omkar", "kamat", "andheri", "mumbai", "maharashtra", 400050, 9874453210, "omkar@kamat"),
+    -> ("priya", "gandhi", "gandhi nagar", "ahmadabad", "gujrat", 500040, 7418529630, "priya@gandhi"),
+    -> ("harshad", "marathe", "ujjain", "indore", "madhya pradesh", 300021, 8874962210, "harshad@marathe"),
+    -> ("yogesh", "patil", "balesar", "jodhpur", "rajastan", 200050, 9563874210, "yogesh@patil"),
+    -> ("smita", "mantri", "shapar", "rajkot", "gujrat", 500040, 9531408764, "smita@mantri");
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++-------------------------------+
+| Tables_in_addressbook_service |
++-------------------------------+
+| address_book                  |
++-------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from Address_Book;
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+| ID | firstName | lastName | address      | city      | state          | zip    | phoneNumber | email           |
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+|  1 | adam      | khan     | bandra       | mumbai    | maharashtra    | 400051 |  9874563210 | adam@khan       |
+|  2 | omkar     | kamat    | andheri      | mumbai    | maharashtra    | 400050 |  9874453210 | omkar@kamat     |
+|  3 | priya     | gandhi   | gandhi nagar | ahmadabad | gujrat         | 500040 |  7418529630 | priya@gandhi    |
+|  4 | harshad   | marathe  | ujjain       | indore    | madhya pradesh | 300021 |  8874962210 | harshad@marathe |
+|  5 | yogesh    | patil    | balesar      | jodhpur   | rajastan       | 200050 |  9563874210 | yogesh@patil    |
+|  6 | smita     | mantri   | shapar       | rajkot    | gujrat         | 500040 |  9531408764 | smita@mantri    |
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+6 rows in set (0.00 sec)
+
+mysql>
