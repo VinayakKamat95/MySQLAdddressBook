@@ -231,3 +231,69 @@ mysql> select * from Address_Book where state="gujrat";
 
 mysql>
 ========================================================================
+To understand the size of Address Book by City and State
+sizeiofAddressBookByCityOrState-UC7
+
+mysql> select * from Address_Book;
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+| ID | firstName | lastName | address      | city      | state          | zip    | phoneNumber | email           |
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+|  1 | adam      | khan     | bandra       | mumbai    | maharashtra    | 400051 |  9874563210 | adam@khan       |
+|  3 | priya     | gandhi   | gandhi nagar | ahmadabad | gujrat         | 500040 |  7418529630 | priya@gandhi    |
+|  4 | harshad   | marathe  | ujjain       | indore    | madhya pradesh | 300021 |  8874962210 | harshad@marathe |
+|  5 | yogesh    | patil    | balesar      | jodhpur   | rajastan       | 200050 |  9563874210 | yogesh@patil    |
+|  6 | smita     | mantri   | shapar       | rajkot    | gujrat         | 500040 |  9531408764 | smita@mantri    |
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Address_Book where city="mumbai" OR state="maharashtra";
++----+-----------+----------+---------+--------+-------------+--------+-------------+-----------+
+| ID | firstName | lastName | address | city   | state       | zip    | phoneNumber | email     |
++----+-----------+----------+---------+--------+-------------+--------+-------------+-----------+
+|  1 | adam      | khan     | bandra  | mumbai | maharashtra | 400051 |  9874563210 | adam@khan |
++----+-----------+----------+---------+--------+-------------+--------+-------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from Address_Book where state="gujrat";
++----+-----------+----------+--------------+-----------+--------+--------+-------------+--------------+
+| ID | firstName | lastName | address      | city      | state  | zip    | phoneNumber | email        |
++----+-----------+----------+--------------+-----------+--------+--------+-------------+--------------+
+|  3 | priya     | gandhi   | gandhi nagar | ahmadabad | gujrat | 500040 |  7418529630 | priya@gandhi |
+|  6 | smita     | mantri   | shapar       | rajkot    | gujrat | 500040 |  9531408764 | smita@mantri |
++----+-----------+----------+--------------+-----------+--------+--------+-------------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> select COUNT(*) from Address_Book where city = "mumbai";
++----------+
+| COUNT(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select COUNT(*) from Address_Book where city = "mumbai" or state="maharashtra";
++----------+
+| COUNT(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select COUNT(*) from Address_Book where city = "mumbai" or state="gujrat";
++----------+
+| COUNT(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select COUNT(*) from Address_Book where state="gujrat";
++----------+
+| COUNT(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+mysql>
+=========================================================================
