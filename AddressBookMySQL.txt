@@ -327,3 +327,94 @@ mysql> select * from Address_Book where city="mumbai" ORDER BY firstName;
 
 mysql>
 =========================================================================
+To identify each Address Book with name and Type
+ToIdentifyEachAddressBookWithNameAndType-UC9
+=================================================================
+To get number of contact persons
+toGetNumberOfContactPersons-UC10
+
+mysql> select * from addressBook_name;
++-----------------+------------------+---------+
+| ADDRESSBBOOK_ID | addressBook_Name | type_ID |
++-----------------+------------------+---------+
+|               1 | addressBook1     |       1 |
+|               2 | addressBook1     |       2 |
++-----------------+------------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from relation_table;
++------------+----+-----------------+
+| RelationID | ID | ADDRESSBBOOK_ID |
++------------+----+-----------------+
+|          1 |  1 |               1 |
+|          3 |  3 |               2 |
+|          4 |  8 |               1 |
+|          5 |  9 |               1 |
++------------+----+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from addressBook_type;
++---------+------------------+
+| type_ID | addressBook_Type |
++---------+------------------+
+|       1 | family           |
+|       2 | friends          |
++---------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT address_book.*
+    -> FROM address_book
+    -> JOIN relation_table on (address_book.ID=relation_table.ID)
+    -> JOIN addressBook_name on (addressBook_name.ADDRESSBBOOK_ID=relation_table.ADDRESSBBOOK_ID)
+    -> JOIN addressBook_type on (addressBook_type.type_ID=addressBook_name.type_ID)
+    -> WHERE addressBook_Type="family";
++----+-----------+----------+------------+--------+-------------+--------+-------------+-------------+
+| ID | firstName | lastName | address    | city   | state       | zip    | phoneNumber | email       |
++----+-----------+----------+------------+--------+-------------+--------+-------------+-------------+
+|  1 | adam      | khan     | bandra     | mumbai | maharashtra | 400051 |  9874563210 | adam@khan   |
+|  8 | omkar     | kamat    | andheri    | mumbai | maharashtra | 400050 |  9874453210 | omkar@kamat |
+|  9 | om        | kamat    | villeparle | mumbai | maharashtra | 400068 |  9876453310 | om@kamat    |
++----+-----------+----------+------------+--------+-------------+--------+-------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT count(*)
+    -> FROM address_book
+    -> JOIN relation_table on (address_book.ID=relation_table.ID)
+    -> JOIN addressBook_name on (addressBook_name.ADDRESSBBOOK_ID=relation_table.ADDRESSBBOOK_ID)
+    -> JOIN addressBook_type on (addressBook_type.type_ID=addressBook_name.type_ID)
+    -> WHERE addressBook_Type="family";
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT address_book.*
+    -> FROM address_book
+    -> JOIN relation_table on (address_book.ID=relation_table.ID)
+    -> JOIN addressBook_name on (addressBook_name.ADDRESSBBOOK_ID=relation_table.ADDRESSBBOOK_ID)
+    -> JOIN addressBook_type on (addressBook_type.type_ID=addressBook_name.type_ID)
+    -> WHERE addressBook_Type="friends";
++----+-----------+----------+--------------+-----------+--------+--------+-------------+--------------+
+| ID | firstName | lastName | address      | city      | state  | zip    | phoneNumber | email        |
++----+-----------+----------+--------------+-----------+--------+--------+-------------+--------------+
+|  3 | priya     | gandhi   | gandhi nagar | ahmadabad | gujrat | 500040 |  7418529630 | priya@gandhi |
++----+-----------+----------+--------------+-----------+--------+--------+-------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT count(*)
+    -> FROM address_book
+    -> JOIN relation_table on (address_book.ID=relation_table.ID)
+    -> JOIN addressBook_name on (addressBook_name.ADDRESSBBOOK_ID=relation_table.ADDRESSBBOOK_ID)
+    -> JOIN addressBook_type on (addressBook_type.type_ID=addressBook_name.type_ID)
+    -> WHERE addressBook_Type="friends";
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql>
+=======================================================================
