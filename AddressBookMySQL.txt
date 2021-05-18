@@ -418,3 +418,67 @@ mysql> SELECT count(*)
 
 mysql>
 =======================================================================
+To add person to both Friend and Family
+ToAddPersonToBothFriendAndFamily-UC11
+
+mysql> select * from address_book;
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+| ID | firstName | lastName | address      | city      | state          | zip    | phoneNumber | email           |
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+|  1 | adam      | khan     | bandra       | mumbai    | maharashtra    | 400051 |  9874563210 | adam@khan       |
+|  3 | priya     | gandhi   | gandhi nagar | ahmadabad | gujrat         | 500040 |  7418529630 | priya@gandhi    |
+|  4 | harshad   | marathe  | ujjain       | indore    | madhya pradesh | 300021 |  8874962210 | harshad@marathe |
+|  5 | yogesh    | patil    | balesar      | jodhpur   | rajastan       | 200050 |  9563874210 | yogesh@patil    |
+|  6 | smita     | mantri   | shapar       | rajkot    | gujrat         | 500040 |  9531408764 | smita@mantri    |
+|  8 | omkar     | kamat    | andheri      | mumbai    | maharashtra    | 400050 |  9874453210 | omkar@kamat     |
+|  9 | om        | kamat    | villeparle   | mumbai    | maharashtra    | 400068 |  9876453310 | om@kamat        |
++----+-----------+----------+--------------+-----------+----------------+--------+-------------+-----------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from addressBook_name;
++-----------------+------------------+---------+
+| ADDRESSBBOOK_ID | addressBook_Name | type_ID |
++-----------------+------------------+---------+
+|               1 | addressBook1     |       1 |
+|               2 | addressBook1     |       2 |
++-----------------+------------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from relation_table;
++------------+----+-----------------+
+| RelationID | ID | ADDRESSBBOOK_ID |
++------------+----+-----------------+
+|          1 |  1 |               1 |
+|          3 |  3 |               2 |
+|          4 |  8 |               1 |
+|          5 |  9 |               1 |
++------------+----+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from addressBook_type;
++---------+------------------+
+| type_ID | addressBook_Type |
++---------+------------------+
+|       1 | family           |
+|       2 | friends          |
++---------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO relation_table (ID, ADDRESSBBOOK_ID)
+    -> VALUES (1, 2);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT address_book.*,addressBook_name.addressBook_Name,addressBook_type.addressBook_Type
+    -> FROM address_book
+    -> JOIN relation_table on (address_book.ID=relation_table.ID)
+    -> JOIN addressBook_name on (addressBook_name.ADDRESSBBOOK_ID=relation_table.ADDRESSBBOOK_ID)
+    -> JOIN addressBook_type on (addressBook_type.type_ID=addressBook_name.type_ID)
+    -> WHERE address_book.firstName="adam";
++----+-----------+----------+---------+--------+-------------+--------+-------------+-----------+------------------+------------------+
+| ID | firstName | lastName | address | city   | state       | zip    | phoneNumber | email     | addressBook_Name | addressBook_Type |
++----+-----------+----------+---------+--------+-------------+--------+-------------+-----------+------------------+------------------+
+|  1 | adam      | khan     | bandra  | mumbai | maharashtra | 400051 |  9874563210 | adam@khan | addressBook1     | family           |
+|  1 | adam      | khan     | bandra  | mumbai | maharashtra | 400051 |  9874563210 | adam@khan | addressBook1     | friends          |
++----+-----------+----------+---------+--------+-------------+--------+-------------+-----------+------------------+------------------+
+2 rows in set (0.00 sec)
+===================================================================
